@@ -1,0 +1,11 @@
+import { query } from "./_generated/server";
+
+export const list = query({
+  handler: async (ctx) => {
+    return await ctx.db
+      .query("categories")
+      .filter((q) => q.eq(q.field("isActive"), true))
+      .order("asc")
+      .collect();
+  },
+});
