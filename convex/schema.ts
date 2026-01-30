@@ -11,9 +11,10 @@ export default defineSchema({
 
   menus: defineTable({
     name: v.string(),
+    slug: v.string(),
     price: v.number(),
-    description: v.optional(v.string()),
     categoryIds: v.array(v.id("categories")),
     isAvailable: v.boolean(),
-  }),
+    imageStorageId: v.optional(v.id("_storage")),
+  }).index("by_slug", ["slug"]),
 });

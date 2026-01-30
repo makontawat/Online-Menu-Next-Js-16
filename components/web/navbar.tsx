@@ -69,19 +69,21 @@ export function Navbar() {
               <SheetTitle className="text-2xl">หมวดหมู่</SheetTitle>
               <SheetDescription>Navigate through categories</SheetDescription>
             </SheetHeader>
-            <div className="mt-6 flex flex-col gap-2 ">
-              {!categories && (
-                <div className="space-y-2">
-                  <div className="ml-4 mt-4 h-4 bg-muted rounded w-1/2 animate-pulse" />
-                  <div className="ml-4 mt-4 h-4 bg-muted rounded w-2/3 animate-pulse" />
-                  <div className="ml-4 mt-4 h-4 bg-muted rounded w-1/3 animate-pulse" />
+            <div className="mt-6 flex flex-col gap-2">
+              {/* Loading skeleton */}
+              {categories === undefined && (
+                <div className="space-y-2 px-4">
+                  <div className="h-4 bg-muted rounded w-1/2 animate-pulse" />
+                  <div className="h-4 bg-muted rounded w-2/3 animate-pulse" />
+                  <div className="h-4 bg-muted rounded w-1/3 animate-pulse" />
                 </div>
               )}
+
+              {/* Category list */}
               {categories?.map((cat) => (
-                <>
+                <div key={cat._id}>
                   <Link
-                    key={cat._id}
-                    href={`/menu?category=${cat.slug}`}
+                    href={`/menu/${cat.slug}`} // ✅ สำคัญ
                     onClick={() => setOpen(false)}
                     className={buttonVariants({
                       variant: "ghost",
@@ -91,7 +93,7 @@ export function Navbar() {
                     {cat.name}
                   </Link>
                   <Separator className="my-2" />
-                </>
+                </div>
               ))}
             </div>
           </SheetContent>
