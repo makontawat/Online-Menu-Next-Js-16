@@ -15,6 +15,7 @@ export default defineSchema({
     price: v.number(),
     categoryIds: v.array(v.id("categories")),
     isAvailable: v.boolean(),
+    description: v.optional(v.string()),
     imageStorageId: v.optional(v.id("_storage")),
   }).index("by_slug", ["slug"]),
 });
